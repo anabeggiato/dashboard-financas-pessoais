@@ -2,6 +2,8 @@ import Image from "next/image";
 import Header from "./components/Header";
 import Geral from "./components/Geral";
 import DonutChart from "./components/DonutChart";
+import BarChart from "./components/BarChart";
+import LineChart from "./components/LineChart";
 
 export default function Home() {
   const legendas = [
@@ -18,29 +20,41 @@ export default function Home() {
     <div>
       <Header />
       <main className="p-5 space-y-4">
-        <h1 className="text-black">Olá, Usuário! Bem-vindo de volta!</h1>
+        <h1 className="text-black text-lg">Olá, Usuário! Bem-vindo de volta!</h1>
         <Geral />
 
-        <section className="card flex items-center p-4">
-          <div className="mr-5">
-            <DonutChart />
-          </div>
-
-          <div>
-            <p className="font-medium mb-2">Gastos por categoria</p>
-            <div className="grid grid-cols-2 gap-2">
-              {legendas.map((legenda) => (
-                <div key={legenda.categoria} className="flex items-center gap-2">
-                  <div
-                    className="w-[12px] h-[12px] rounded-sm"
-                    style={{ backgroundColor: legenda.cor }}
-                  />
-                  <p className="text-sm text-gray-700">{legenda.categoria}</p>
-                </div>
-              ))}
+        <div className="lg:grid lg:grid-cols-3 lg:gap-4 space-y-4">
+          <section className="card flex items-center p-4">
+            <div className="mr-5">
+              <DonutChart />
             </div>
-          </div>
-        </section>
+
+            <div>
+              <p className="font-medium mb-2">Gastos por categoria</p>
+              <div className="grid grid-cols-2 gap-2">
+                {legendas.map((legenda) => (
+                  <div key={legenda.categoria} className="flex items-center gap-2">
+                    <div
+                      className="w-[12px] h-[12px] rounded-sm"
+                      style={{ backgroundColor: legenda.cor }}
+                    />
+                    <p className="text-sm text-gray-700">{legenda.categoria}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="card">
+            <h1 className="text-center">Gastos por semana</h1>
+            <BarChart />
+          </section>
+
+          <section className="card">
+            <h1 className="text-center">Gastos por mês</h1>
+            <LineChart />
+          </section>
+        </div>
       </main>
     </div>
   );
