@@ -1,17 +1,15 @@
-import React from "react";
-import { FaArrowCircleUp, FaArrowCircleDown } from "react-icons/fa";
+"use client"
+import React, { useEffect, useState } from "react";
+import { FaArrowCircleUp, FaArrowCircleDown, FaEdit, FaTrash } from "react-icons/fa";
 
 export default function Transactions() {
-    const transactions = [
-        { id: 1, data: "2025-10-01", tipo: "entrada", descricao: "Salário mensal", categoria: "Outros", valor: 5000 },
-        { id: 2, data: "2025-10-03", tipo: "saída", descricao: "Aluguel apartamento", categoria: "Moradia", valor: 1500 },
-        { id: 3, data: "2025-10-05", tipo: "saída", descricao: "Supermercado", categoria: "Alimentação", valor: 350 },
-        { id: 4, data: "2025-10-07", tipo: "saída", descricao: "Passagem de ônibus", categoria: "Transporte", valor: 120 },
-        { id: 5, data: "2025-10-08", tipo: "saída", descricao: "Cinema", categoria: "Lazer", valor: 80 },
-        { id: 6, data: "2025-10-10", tipo: "entrada", descricao: "Venda de itens usados", categoria: "Outros", valor: 200 },
-        { id: 7, data: "2025-10-12", tipo: "saída", descricao: "Curso online", categoria: "Educação", valor: 300 },
-        { id: 8, data: "2025-10-13", tipo: "saída", descricao: "Consulta médica", categoria: "Saúde", valor: 250 }
-    ];
+
+    const [transacoes, setTransacoes] = useState([]);
+
+    useEffect(() => {
+        const data = JSON.parse(localStorage.getItem("transactions")) || [];
+        setTransacoes(data)
+    }, [])
 
     const legendas = [
         { categoria: "Moradia", cor: "#3B82F6" },
@@ -50,7 +48,7 @@ export default function Transactions() {
                     </thead>
 
                     <tbody>
-                        {transactions.map((transaction) => (
+                        {transacoes.map((transaction) => (
                             <tr key={transaction.id} className="text-sm">
                                 <td className="py-2 font-normal text-center align-middle">{formatDate(transaction.data)}</td>
 

@@ -1,10 +1,13 @@
-import Image from "next/image";
+"use client"
+import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Geral from "./components/Geral";
 import DonutChart from "./components/DonutChart";
 import BarChart from "./components/BarChart";
 import LineChart from "./components/LineChart";
 import Transactions from "./components/Transactions";
+import { FaPlusCircle } from "react-icons/fa"
+import AddTansaction from "./components/AddTansaction";
 
 export default function Home() {
   const legendas = [
@@ -17,11 +20,17 @@ export default function Home() {
     { categoria: "Outros", cor: "#9CA3AF" },
   ];
 
+  const [showPopup, setShowPopup] = useState(false);
+
   return (
     <div>
       <Header />
       <main className="p-5 space-y-4">
-        <h1 className="text-black text-lg">Olá, Usuário! Bem-vindo de volta!</h1>
+        <div className="w-full flex items-center justify-between">
+          <h1 className="text-black text-2xl">Olá, bem-vindo de volta!</h1>
+          <FaPlusCircle onClick={() => setShowPopup(!showPopup)} size={20} />
+          {showPopup && <AddTansaction showPopup={showPopup} setShowPopup={setShowPopup} />}
+        </div>
         <Geral />
 
         <div className="lg:grid lg:grid-cols-3 lg:gap-4 space-y-4">
