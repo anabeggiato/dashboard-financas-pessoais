@@ -54,7 +54,7 @@ export default function DonutChart() {
     };
 
     return (
-        <div className="h-[100px] dark:bg-zinc-900">
+        <div className="w-full dark:bg-zinc-900">
             <Doughnut data={data} options={options} />
         </div>
     );

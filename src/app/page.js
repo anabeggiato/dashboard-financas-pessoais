@@ -4,6 +4,7 @@ import Geral from "./components/Geral";
 import DonutChart from "./components/DonutChart";
 import BarChart from "./components/BarChart";
 import LineChart from "./components/LineChart";
+import Transactions from "./components/Transactions";
 
 export default function Home() {
   const legendas = [
@@ -25,11 +26,11 @@ export default function Home() {
 
         <div className="lg:grid lg:grid-cols-3 lg:gap-4 space-y-4">
           <section className="card flex items-center p-4">
-            <div className="mr-5">
+            <div className="mr-5 w-1/3">
               <DonutChart />
             </div>
 
-            <div>
+            <div className="w-2/3">
               <p className="font-medium mb-2">Gastos por categoria</p>
               <div className="grid grid-cols-2 gap-2">
                 {legendas.map((legenda) => (
@@ -45,7 +46,7 @@ export default function Home() {
             </div>
           </section>
 
-          <section className="card">
+          <section className="card flex flex-col align-items-center">
             <h1 className="text-center">Gastos por semana</h1>
             <BarChart />
           </section>
@@ -54,7 +55,13 @@ export default function Home() {
             <h1 className="text-center">Gastos por mês</h1>
             <LineChart />
           </section>
+          <div />
         </div>
+
+        <section className="card">
+          <h1 className="text-center">Histórico de transações</h1>
+          <Transactions />
+        </section>
       </main>
     </div>
   );
