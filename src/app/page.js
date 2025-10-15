@@ -22,10 +22,18 @@ export default function Home() {
 
   const [showPopup, setShowPopup] = useState(false);
 
+      const [transacoes, setTransacoes] = useState([]);
+
+    useEffect(() => {
+        const data = JSON.parse(localStorage.getItem("transactions")) || [];
+        const ultimas = data.slice(-5)
+        setTransacoes(ultimas)
+    }, [])
+
   return (
-    <div>
+    <div className="space-y-4">
       <Header />
-      <main className="p-5 space-y-4">
+      <main className="p-5 space-y-4 mt-[65px] md:mt-[85px]">
         <div className="w-full flex items-center justify-between">
           <h1 className="text-black text-2xl">Olá, bem-vindo de volta!</h1>
           <FaPlusCircle onClick={() => setShowPopup(!showPopup)} size={20} />
@@ -68,8 +76,8 @@ export default function Home() {
         </div>
 
         <section className="card">
-          <h1 className="text-center">Histórico de transações</h1>
-          <Transactions />
+          <h1 className="text-center">Últimas transações</h1>
+          <Transactions transacoes={transacoes}/>
         </section>
       </main>
     </div>

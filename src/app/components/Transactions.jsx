@@ -2,14 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { FaArrowCircleUp, FaArrowCircleDown, FaEdit, FaTrash } from "react-icons/fa";
 
-export default function Transactions() {
-
-    const [transacoes, setTransacoes] = useState([]);
-
-    useEffect(() => {
-        const data = JSON.parse(localStorage.getItem("transactions")) || [];
-        setTransacoes(data)
-    }, [])
+export default function Transactions({transacoes}) {
 
     const legendas = [
         { categoria: "Moradia", cor: "#3B82F6" },

@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { FaArrowCircleUp, FaArrowCircleDown } from "react-icons/fa"
 
 export default function Geral() {
-    const [transacoes, setTransacoes] = useState([]);
     const [saldo, setSaldo] = useState(0);
     const [totalEntradas, setTotalEntradas] = useState(0)
     const [totalSaidas, setTotalSaidas] = useState(0)
 
     useEffect(() => {
         const data = JSON.parse(localStorage.getItem("transactions")) || [];
-        setTransacoes(data)
 
         const entradas = data.filter((t) => t.tipo === "entrada")
         const saidas = data.filter((t) => t.tipo === "saida")
@@ -24,18 +22,18 @@ export default function Geral() {
     }, [])
 
     return (
-        <section className="grid grid-cols-2 gap-2">
+        <section className="flex gap-2">
             <div className="card">
                 <h3 className="subtitle">Saldo atual</h3>
-                <span className="value">R${saldo}</span>
+                <span className="value">R${saldo.toFixed(2)}</span>
                 <div className="flex items-center gap-2">
                     <div className="flex items-center gap-1">
                         <FaArrowCircleUp className="text-green" size={12} />
-                        <p className="text-green text-sm">R${totalEntradas}</p>
+                        <p className="text-green text-sm">R${totalEntradas.toFixed(2)}</p>
                     </div>
                     <div className="flex items-center gap-1">
                         <FaArrowCircleDown className="text-red" size={12} />
-                        <p className="text-red text-sm">R${totalSaidas}</p>
+                        <p className="text-red text-sm">R${totalSaidas.toFixed(2)}</p>
                     </div>
                 </div>
             </div>

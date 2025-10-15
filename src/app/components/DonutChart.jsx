@@ -1,25 +1,43 @@
 "use client"
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function DonutChart() {
+    const [gastosPorCategoria, setGastosPorCategoria] = useState({});
+
+    useEffect(() => {
+        const transacoes = JSON.parse(localStorage.getItem("transactions")) || [];
+        const saidas = transacoes.filter((t) => t.tipo === "saida");
+
+        const soma = saidas.reduce((acc, t) => {
+            acc[t.categoria] = (acc[t.categoria] || 0) + Number(t.valor);
+            return acc;
+        }, {});
+
+        setGastosPorCategoria(soma);
+    }, []);
+
+    const labels = [
+        "Moradia",
+        "Alimentação",
+        "Transporte",
+        "Lazer",
+        "Educação",
+        "Saúde",
+        "Outros",
+    ];
+
+    const valores = labels.map((categoria) => gastosPorCategoria[categoria] || 0);
+
     const data = {
-        labels: [
-            "Moradia",
-            "Alimentação",
-            "Transporte",
-            "Lazer",
-            "Educação",
-            "Saúde",
-            "Outros",
-        ],
+        labels,
         datasets: [
             {
                 label: "Despesas (R$)",
-                data: [1200, 850, 300, 450, 600, 250, 200],
+                data: valores,
                 backgroundColor: [
                     "#3B82F6",
                     "#10B981",
@@ -32,10 +50,11 @@ export default function DonutChart() {
                 borderColor: "#ffffff",
                 borderWidth: 2,
                 cutout: "70%",
-                borderRadius: 5
+                borderRadius: 5,
             },
         ],
     };
+
 
     const options = {
         plugins: {
