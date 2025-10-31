@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { FaArrowCircleUp, FaArrowCircleDown, FaEdit, FaTrash } from "react-icons/fa";
 
-export default function Transactions({transacoes}) {
+export default function Transactions({ transacoes }) {
 
     const legendas = [
         { categoria: "Moradia", cor: "#3B82F6" },
@@ -35,8 +35,8 @@ export default function Transactions({transacoes}) {
                             <th className="p-2">Data</th>
                             <th className="p-2">Tipo</th>
                             <th className="p-2">Descrição</th>
-                            <th className="p-2">Categoria</th>
                             <th className="p-2">Valor</th>
+                            <th className="p-2">Categoria</th>
                         </tr>
                     </thead>
 
@@ -55,14 +55,14 @@ export default function Transactions({transacoes}) {
                                     {transaction.descricao}
                                 </td>
 
+                                <td className="py-2 font-normal text-center align-middle">{transaction.valor}</td>
+
                                 <td className="py-2 font-normal flex justify-center items-center align-center">
                                     <div
                                         className="w-4 h-4 rounded-full flex items-center justify-center text-white"
                                         style={{ backgroundColor: getCategoryColor(transaction.categoria) }}
                                     />
                                 </td>
-
-                                <td className="py-2 font-normal text-center align-middle">{transaction.valor}</td>
                             </tr>
                         ))}
                     </tbody>

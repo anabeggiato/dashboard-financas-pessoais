@@ -26,17 +26,18 @@ export default function Home() {
 
     useEffect(() => {
         const data = JSON.parse(localStorage.getItem("transactions")) || [];
+        data.sort((a, b) => new Date(b.data) - new Date(a.data));
         const ultimas = data.slice(-5)
         setTransacoes(ultimas)
     }, [])
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 dark:bg-foreground">
       <Header />
-      <main className="p-5 space-y-4 mt-[65px] md:mt-[85px]">
+      <main className="p-5 space-y-4 mt-[65px] md:mt-[85px] dark:text-white">
         <div className="w-full flex items-center justify-between">
-          <h1 className="text-black text-2xl">Olá, bem-vindo de volta!</h1>
-          <FaPlusCircle onClick={() => setShowPopup(!showPopup)} size={20} />
+          <h1 className="text-black dark:text-white text-2xl">Olá, bem-vindo de volta!</h1>
+          <FaPlusCircle onClick={() => setShowPopup(!showPopup)} size={20} className="hover:cursor-pointer"/>
           {showPopup && <AddTansaction showPopup={showPopup} setShowPopup={setShowPopup} />}
         </div>
         <Geral />
@@ -44,7 +45,7 @@ export default function Home() {
         <div className="lg:grid lg:grid-cols-3 lg:gap-4 space-y-4">
           <section className="card flex items-center p-4">
             <div className="mr-5 w-1/3">
-              <DonutChart />
+              <DonutChart className="dark:bg-foreground"/>
             </div>
 
             <div className="w-2/3">
@@ -56,14 +57,14 @@ export default function Home() {
                       className="w-[12px] h-[12px] rounded-sm"
                       style={{ backgroundColor: legenda.cor }}
                     />
-                    <p className="text-sm text-gray-700">{legenda.categoria}</p>
+                    <p className="text-sm text-gray-700 dark:text-white">{legenda.categoria}</p>
                   </div>
                 ))}
               </div>
             </div>
           </section>
 
-          <section className="card flex flex-col align-items-center">
+          <section className="card flex flex-col align-items-center">           
             <h1 className="text-center">Gastos por semana</h1>
             <BarChart />
           </section>

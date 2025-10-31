@@ -50,7 +50,7 @@ export default function BarChart() {
     };
 
     return (
-        <div className="w-full dark:bg-zinc-900">
+        <div className="w-full dark:text-white">
             <Bar data={data} options={options} />
         </div>
     )

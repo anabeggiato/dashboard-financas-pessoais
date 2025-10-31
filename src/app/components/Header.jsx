@@ -9,7 +9,7 @@ export default function Header() {
   const router = useRouter();
 
   return (
-    <div className='fixed top-0 left-0 w-screen h-[65px] md:h-[85px] bg-primary'>
+    <div className='fixed top-0 left-0 w-screen h-[65px] md:h-[85px] bg-primary dark:bg-dark-primary dark:shadow-md'>
       <div className='flex items-center h-full w-full px-5'>
         {openHeader === false ? (
           <FaBars className='text-white' size={20} onClick={() => setOpenHeader(true)} />
@@ -18,9 +18,9 @@ export default function Header() {
         )}
       </div>
       {openHeader && (
-        <div className='w-full bg-primary mt-[-1px] text-white flex flex-col items-center'>
-          <p className='py-2 w-full text-center hover:bg-blue-950' onClick={() => router.push('/')}>Visão geral</p>
-          <p className='py-2 w-full text-center hover:bg-blue-950' onClick={() => router.push('/historico')}>Histórico de transações</p>
+        <div className='w-full bg-primary mt-[-1px] text-white flex flex-col items-center dark:bg-dark-primary'>
+          <p className='py-2 w-full text-center hover:bg-dark-primary dark:hover:bg-primary' onClick={() => router.push('/')}>Visão geral</p>
+          <p className='py-2 w-full text-center hover:bg-dark-primary dark:hover:bg-primary' onClick={() => router.push('/historico')}>Histórico de transações</p>
         </div>
       )}
     </div>
